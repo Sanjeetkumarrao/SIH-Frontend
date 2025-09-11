@@ -46,7 +46,9 @@ const ProfileCard = () => {
       {cards.map((card) => (
         <div
           key={card.id}
-          className="bg-white shadow-lg rounded-2xl overflow-hidden flex flex-col"
+          className="relative bg-white/70 backdrop-blur-md shadow-lg rounded-2xl overflow-hidden flex flex-col 
+                     transition-all duration-300 hover:scale-105 hover:shadow-2xl 
+                     hover:bg-white/30 hover:backdrop-blur-lg hover:border hover:border-white/40"
         >
           {/* Image */}
           <div className="w-full">
@@ -60,7 +62,7 @@ const ProfileCard = () => {
           {/* Content */}
           <div className="p-4 flex flex-col flex-1">
             <h2 className="text-xl font-bold text-gray-800 mb-2">{card.title}</h2>
-            <p className="text-gray-600 mb-4 text-sm flex-1">{card.description}</p>
+            <p className="text-gray-700 mb-4 text-sm flex-1">{card.description}</p>
             <a
               href={card.link}
               target="_blank"

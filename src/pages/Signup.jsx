@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import motif from "../assets/img3.webp"; // decorative heritage pattern
+import motif from "../assets/hero1.jpg"; // decorative heritage pattern
 import logo from "../assets/logo.png";   // project logo
 
 const Signup = () => {
