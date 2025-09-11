@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Menu, X, Search } from "lucide-react";
+import { Menu, X, Search, MessageCircle } from "lucide-react";
 import logo from "../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -15,6 +15,10 @@ const Header = () => {
     navigate("/signup");
   };
 
+  const handleChatbotClick = () => {
+    navigate("/chatbot");
+  };
+
   return (
     <header className="top-6 left-6 right-6 w-full z-50 bg-green-100 border-gray-800 shadow-lg">
       <div className="flex justify-between items-center px-6 py-4">
@@ -28,7 +32,7 @@ const Header = () => {
             {isOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
 
-          {/* Website Logo (redirect to LandingPage) */}
+          {/* Website Logo */}
           <Link to="/" className="flex items-center">
             <img
               src={logo}
@@ -37,18 +41,45 @@ const Header = () => {
             />
           </Link>
 
-          {/* Search bar */}
-          <div className="relative min-w-[200px] md:min-w-[300px] lg:min-w-[400px] ml-2">
-            <input
-              type="text"
-              placeholder="Search here"
-              className="pl-10 pr-4 py-2 w-full rounded-full border shadow-sm focus:outline-green-300 focus:ring-2 focus:ring-green-400"
-            />
-            <Search
-              className="absolute left-3 top-2.5 text-gray-500"
-              size={18}
-            />
+          {/* Search bar with button */}
+          <div className="flex items-center ml-2 rounded-full border shadow-sm focus-within:ring-2 focus-within:ring-green-400 overflow-hidden">
+            <div className="relative flex-1">
+              <input
+                type="text"
+                placeholder="Search here"
+                className="pl-10 pr-3 py-2 w-full outline-none"
+              />
+              <Search
+                className="absolute left-3 top-2.5 text-gray-500"
+                size={18}
+              />
+            </div>
+            <button
+              className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 font-medium"
+            >
+              Search
+            </button>
           </div>
+
+          {/* AI Widget - Stylish */}
+          <button
+            onClick={handleChatbotClick}
+            className="hidden sm:flex items-center gap-2 ml-3 
+                       bg-gradient-to-r from-green-400 via-green-500 to-green-600 
+                       text-white px-4 py-2 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition"
+          >
+            <MessageCircle size={18} />
+            <span className="font-medium">AI Guide</span>
+          </button>
+
+          {/* Mobile AI Widget (only icon) */}
+          <button
+            onClick={handleChatbotClick}
+            className="sm:hidden ml-2 bg-gradient-to-r from-green-400 via-green-500 to-green-600 
+                       text-white p-2 rounded-full shadow-md hover:scale-110 transition"
+          >
+            <MessageCircle size={18} />
+          </button>
         </div>
 
         {/* Right Side - Desktop Nav */}

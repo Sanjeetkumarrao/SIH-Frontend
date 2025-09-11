@@ -6,6 +6,7 @@ import Footer from './components/Footer.jsx';
 import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
 import HeritageLanding from './pages/HeritageLanding.jsx';
+import Chatbot from './pages/Chatbot.jsx';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/login' element={<Login/>} ></Route>
         <Route path='/signup' element={<Signup/>} ></Route>
         <Route path='/explore' element={<HeritageLanding/>} ></Route>
+        <Route path="/chatbot" element={<Chatbot />} />
         {/* <Route path="/music" element={<MusicPage />} />
         <Route path="/cuisine" element={<CuisinePage />} />
         <Route path="/festival" element={<FestivalPage />} />
