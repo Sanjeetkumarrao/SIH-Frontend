@@ -1,24 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Home, BookOpen, Plus, Send } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
-  const [hasStarted, setHasStarted] = useState(false); // Track if chat has started
+  const [hasStarted, setHasStarted] = useState(false);
+
+  // Ref for auto-scroll
+  const messagesEndRef = useRef(null);
 
   const handleSend = () => {
     if (!input.trim()) return;
 
-    // Mark chat as started
     if (!hasStarted) setHasStarted(true);
 
-    // Add user message
     const newMessages = [...messages, { sender: "user", text: input }];
     setMessages(newMessages);
     setInput("");
 
-    // Simulate bot reply after 1 sec
     setTimeout(() => {
       setMessages((prev) => [
         ...prev,
@@ -30,18 +30,23 @@ const Chatbot = () => {
     }, 1000);
   };
 
+  // Auto-scroll inside chat box only
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
+
   return (
     <div className="flex min-h-screen bg-white">
       {/* Sidebar */}
       <aside className="w-16 md:w-20 bg-gray-100 border-r flex flex-col items-center py-6 space-y-6">
-        {/* Logo / Project Name */}
         <div className="flex flex-col items-center mb-8">
           <span className="text-xs md:text-sm font-semibold text-indigo-600 bg-indigo-50 px-2 py-1 rounded-full">
             AI Guide
           </span>
         </div>
 
-        {/* Nav Icons */}
         <nav className="flex flex-col items-center space-y-6 text-gray-600">
           <Link
             to="/"
@@ -61,9 +66,7 @@ const Chatbot = () => {
       {/* Main Content */}
       <main className="flex-1 flex flex-col items-center p-6 md:p-10">
         {!hasStarted ? (
-          // ================= Before Chat Starts =================
           <>
-            {/* Hero Section */}
             <div className="flex flex-col items-center text-center max-w-3xl w-full">
               <div className="flex items-center justify-center gap-4 mb-4">
                 <div className="bg-gradient-to-tr from-indigo-500 to-blue-500 p-4 rounded-full">
@@ -78,7 +81,6 @@ const Chatbot = () => {
               </p>
             </div>
 
-            {/* Story Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-5xl mb-10">
               <div className="p-6 bg-white border rounded-xl shadow-sm hover:shadow-md transition">
                 <p className="text-gray-700 text-sm md:text-base">
@@ -87,7 +89,6 @@ const Chatbot = () => {
                   secrets of India’s past with curious children.
                 </p>
               </div>
-
               <div className="p-6 bg-white border rounded-xl shadow-sm hover:shadow-md transition">
                 <p className="text-gray-700 text-sm md:text-base">
                   Create a storybook about the journey of Diwali lamps as they
@@ -95,7 +96,6 @@ const Chatbot = () => {
                   and unity across India.
                 </p>
               </div>
-
               <div className="p-6 bg-white border rounded-xl shadow-sm hover:shadow-md transition">
                 <p className="text-gray-700 text-sm md:text-base">
                   Tell a story about a wise elephant in Kerala who guides children
@@ -103,7 +103,6 @@ const Chatbot = () => {
                   meaning of devotion.
                 </p>
               </div>
-
               <div className="p-6 bg-white border rounded-xl shadow-sm hover:shadow-md transition">
                 <p className="text-gray-700 text-sm md:text-base">
                   Make a story about a curious child who visits an ancient gurukul
@@ -113,26 +112,30 @@ const Chatbot = () => {
             </div>
           </>
         ) : (
-          // ================= After Chat Starts =================
-          <div className="flex-1 w-full max-w-3xl mb-4 overflow-y-auto space-y-3 p-2 border rounded-lg bg-gray-50">
-            {messages.map((msg, idx) => (
-              <div
-                key={idx}
-                className={`flex ${
-                  msg.sender === "user" ? "justify-end" : "justify-start"
-                }`}
-              >
+          // ✅ Chat box scroll only
+          <div className="flex-1 w-full max-w-3xl mb-4 border rounded-lg bg-gray-50 flex flex-col">
+            <div className="flex-1 overflow-y-auto space-y-3 p-2">
+              {messages.map((msg, idx) => (
                 <div
-                  className={`px-4 py-2 rounded-lg text-sm md:text-base max-w-xs ${
-                    msg.sender === "user"
-                      ? "bg-indigo-500 text-white"
-                      : "bg-gray-200 text-gray-800"
+                  key={idx}
+                  className={`flex ${
+                    msg.sender === "user" ? "justify-end" : "justify-start"
                   }`}
                 >
-                  {msg.text}
+                  <div
+                    className={`px-4 py-2 rounded-lg text-sm md:text-base max-w-xs ${
+                      msg.sender === "user"
+                        ? "bg-indigo-500 text-white"
+                        : "bg-gray-200 text-gray-800"
+                    }`}
+                  >
+                    {msg.text}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+              {/* Auto-scroll anchor */}
+              <div ref={messagesEndRef} />
+            </div>
           </div>
         )}
 

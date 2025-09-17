@@ -3,6 +3,9 @@ import hero1 from "../assets/hero1.jpg";
 import hero2 from "../assets/hero2.jpg";
 import hero3 from "../assets/hero3.jpg";
 import img1 from "../assets/img1.jpg";
+import img4 from "../assets/img4.jpg";
+import img5 from "../assets/img5.jpg";
+import img6 from "../assets/img6.jpg";
 
 const ProfileCard = () => {
   // Card data ek array me store karo
@@ -38,6 +41,30 @@ const ProfileCard = () => {
       description:
         "Hawa Mahal in Jaipur, also known as the 'Palace of Winds', was built in 1799 by Maharaja Sawai Pratap Singh.",
       link: "https://en.wikipedia.org/wiki/Hawa_Mahal",
+    },
+    {
+      id: 5,
+      image: img4,
+      title: "Golden Temple",
+      description:
+        "The Golden Temple, or Sri Harmandir Sahib, is the holiest shrine in Sikhism located in Amritsar, Punjab. ",
+      link: "https://en.wikipedia.org/wiki/Golden_Temple",
+    },
+    {
+      id: 6,
+      image: img5,
+      title: "Jallianwala Bagh",
+      description:
+        "Jallianwala Bagh was originally a lush garden founded in 1812 and was used as a recreation spot. ",
+      link: "https://en.wikipedia.org/wiki/Jallianwala_Bagh_massacre",
+    },
+    {
+      id: 7,
+      image: img6,
+      title: "Qila Mubarak",
+      description:
+        "Qila Mubarak is a grand fortress and royal palace complex in the heart of Patiala city, symbolizing the rich history and regal legacy of the Patiala royal family.  ",
+      link: "https://en.wikipedia.org/wiki/Qila_mubarak",
     },
   ];
 

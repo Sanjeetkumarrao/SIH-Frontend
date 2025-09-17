@@ -5,11 +5,12 @@ import vid3 from "../assets/vid3.mp4";
 import ProfileCard from "../cards/ProfileCard.jsx";
 import { useNavigate } from "react-router-dom";
 
+
 const LandingPage = () => {
   const navigate = useNavigate();
 
   const handleStartClick = () => {
-    navigate("/explore"); // redirect
+    navigate("/states"); // redirect
   };
   return (
     <main className="pt-24 px-8 pb-16 bg-gradient-to-br from-green-100 to-green-150 min-h-screen">
@@ -64,9 +65,6 @@ const LandingPage = () => {
           ))}
         </div>
       </div>
-      <ProfileCard className="mt-16 mx-auto" />
-      <ProfileCard className="mt-16 mx-auto" />
-      <ProfileCard className="mt-16 mx-auto" />
       <ProfileCard className="mt-16 mx-auto" />
     </main>
   );
